@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Project_Eticaret.MODEL.Entities;
+using Project_Eticaret.SERVICE.Option;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +10,21 @@ namespace Project_Eticaret.UI.Controllers
 {
     public class HomeController : Controller
     {
+        CategoryService _categoryService;
+
+        public HomeController()
+        {
+            _categoryService = new CategoryService();
+        }
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult About()
+        // buradaki metot, PartialView ı yönlendirmekiçin kullanılır. bu attribute bu actionı sadece bu durumlarda çağırabileceğini belirtir. Bu attribute opsiyoneldir.
+        [ChildActionOnly]
+        public ActionResult CategoryList()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return PartialView("_CategoryList", _categoryService.GetActive());
         }
     }
 }

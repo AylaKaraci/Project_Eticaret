@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Project_Eticaret.MODEL.Entities.Category>
+
+<ul class="nav">
+    @foreach (var item in Model)
+    {
+        <li class="dropdown-menu">
+            <a href="#" class="dropright dropdown-item">
+                <span class="nav-item">@item.Name</span>
+            </a>
+            <ul>
+                @foreach (var subitem in item.SubCategories)
+                {
+                <li class="dropdown-item-text">
+                    <a href="/Product/List/@subitem.ID" class="dropright dropdown-item">
+                        @subitem.Name
+                    </a>
+                  
+                </li>
+                }
+            </ul>
+        </li>
+    }
+</ul>
